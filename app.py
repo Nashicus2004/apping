@@ -4,31 +4,30 @@ from spam_model import train_model
 # Load model and accuracy
 model, acc = train_model()
 
-# Custom CSS for unique modern style
+# Force background color using HTML + CSS
 st.markdown("""
     <style>
-        /* Page background gradient */
-        .main {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        /* Set full-screen gradient background */
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background-attachment: fixed;
+            background-size: cover;
             color: white;
         }
 
-        html, body, [class*="css"] {
-            background-color: transparent;
-        }
+        /* Hide Streamlit branding footer */
+        footer {visibility: hidden;}
 
-        h1, h2, h3, h4 {
-            color: #ffffff;
-        }
-
+        /* Style for text area */
         .stTextArea textarea {
-            background: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
             border: 1px solid #ccc;
             border-radius: 12px;
             font-size: 16px;
-            color: white;
         }
 
+        /* Style for button */
         .stButton button {
             background: linear-gradient(45deg, #00dbde, #fc00ff);
             border: none;
@@ -44,14 +43,13 @@ st.markdown("""
             transform: scale(1.05);
         }
 
+        /* Glass-style card */
         .glass-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.07);
             border-radius: 15px;
-            padding: 20px;
+            padding: 30px;
             margin-top: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         .prediction-box {
@@ -73,35 +71,34 @@ st.markdown("""
             background: rgba(0, 255, 0, 0.2);
             border: 2px solid #4dff88;
         }
-
-        footer {visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
 
-# Title
-st.markdown("<h1 style='text-align: center;'>🚀 Spam Detector</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>Real-time spam classification using NLP</h3>", unsafe_allow_html=True)
+# Header
+st.markdown("<h1 style='text-align: center;'>📧 Spam Message Detector</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #ccc;'>Instantly detect spam using Machine Learning</h3>", unsafe_allow_html=True)
 
-# Glass box container
+# Main input container
 with st.container():
     st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-    user_input = st.text_area("💬 Type your message below:", height=150, placeholder="Enter any message...")
-    st.markdown(f"<p style='color: #bbb;'>🧠 Model Accuracy: <code>{acc * 100:.2f}%</code></p>", unsafe_allow_html=True)
+    user_input = st.text_area("💬 Enter your message:", height=150, placeholder="Type a message here...")
 
-    if st.button("🔍 Predict Message"):
+    st.markdown(f"<p style='color: #ccc;'>🧠 Model Accuracy: <code>{acc * 100:.2f}%</code></p>", unsafe_allow_html=True)
+
+    if st.button("🔍 Predict"):
         if user_input.strip() == "":
-            st.warning("🚨 Please enter a message before predicting.")
+            st.warning("🚨 Please enter a message.")
         else:
             prediction = model.predict([user_input])[0]
             label = "🚫 Spam" if prediction == 1 else "✅ Not Spam"
             css_class = "spam" if prediction == 1 else "not-spam"
             st.markdown(
-                f'<div class="prediction-box {css_class}">Result: {label}</div>',
+                f'<div class="prediction-box {css_class}">Prediction: {label}</div>',
                 unsafe_allow_html=True
             )
 
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
-st.markdown("<br><hr><p style='text-align: center; color: #aaa;'>Built with ❤️ using Streamlit and Scikit-learn</p>", unsafe_allow_html=True)
+st.markdown("<hr><p style='text-align: center; color: #aaa;'>⚙️ Built using Streamlit, Scikit-learn & Love 💖</p>", unsafe_allow_html=True)
