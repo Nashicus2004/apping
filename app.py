@@ -72,7 +72,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center;'>📧 Spam Message Detector AI</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Spam Message Detector AI</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #ccc;'>Instantly detect spam using Machine Learning</h3>", unsafe_allow_html=True)
 
 with st.container():
