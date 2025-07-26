@@ -1,10 +1,8 @@
 import streamlit as st
 from spam_model import train_model
 
-# Load model and accuracy
 model, acc = train_model()
 
-# Force background color using HTML + CSS
 st.markdown("""
     <style>
         /* Set full-screen gradient background */
@@ -74,24 +72,22 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header
-st.markdown("<h1 style='text-align: center;'>📧 Spam Message Detector</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>📧 Spam Message Detector AI</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #ccc;'>Instantly detect spam using Machine Learning</h3>", unsafe_allow_html=True)
 
-# Main input container
 with st.container():
     st.markdown('<div class="glass-box">', unsafe_allow_html=True)
 
-    user_input = st.text_area("💬 Enter your message:", height=150, placeholder="Type a message here...")
+    user_input = st.text_area(" Enter suspected message:", height=150, placeholder="Enter text here:")
 
-    st.markdown(f"<p style='color: #ccc;'>🧠 Model Accuracy: <code>{acc * 100:.2f}%</code></p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: #ccc;'> Model Accuracy: <code>{acc * 100:.2f}%</code></p>", unsafe_allow_html=True)
 
     if st.button("🔍 Predict"):
         if user_input.strip() == "":
-            st.warning("🚨 Please enter a message.")
+            st.warning(" Please enter a message.")
         else:
             prediction = model.predict([user_input])[0]
-            label = "🚫 Spam" if prediction == 1 else "✅ Not Spam"
+            label = " Spam" if prediction == 1 else " Not Spam"
             css_class = "spam" if prediction == 1 else "not-spam"
             st.markdown(
                 f'<div class="prediction-box {css_class}">Prediction: {label}</div>',
