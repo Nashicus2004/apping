@@ -97,4 +97,4 @@ with st.container():
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
-st.markdown("<hr><p style='text-align: center; color: #aaa;'>⚙️ Built using Streamlit, Scikit-learn & Love 💖</p>", unsafe_allow_html=True)
+st.markdown("<hr><p style='text-align: center; color: #aaa;'>_</p>", unsafe_allow_html=True)
